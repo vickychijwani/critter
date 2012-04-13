@@ -1,0 +1,6 @@
+*.db
+backup.rb
+*.bak
+downloads/*
+.bundle
+.rvmrc
