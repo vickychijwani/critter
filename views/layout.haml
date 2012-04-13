@@ -52,6 +52,13 @@
                     %li
                       %a{ :href => "/logout" } Logout
 
+            - else
+              %ul.nav.pull-right
+                %li
+                  %a{ :href => "/oauth" }
+                    %i.icon-twitter-sign.icon-large
+                    Sign-in with Twitter
+
     .container.wrapper
       = partial :flash_messages
       = yield
