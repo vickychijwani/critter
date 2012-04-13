@@ -13,27 +13,33 @@
     %a.carousel-control.right{ :href => "#screenshots", :data => { :slide => "next" } } &rsaquo;
   %h1 Critter
   .row
-    %p.span3 We crawl your tweets and store them in our database, giving you complete control over them.
+    %p.span3 Critter crawls your tweets and keeps them safe for you, giving you complete control over them.
   %a.btn.btn-primary.btn-large{ :href => "./oauth" }
     %i.icon-twitter-sign.icon-large
     Sign-in with Twitter
 
 %section#why.rounded-6
   .row
-    .span4
+    .span3
       %h3
-        %i.icon-folder-open.icon-large
+        %i.icon-folder-close.icon-large
         Archive
       %p= "So you can be assured that Twitter's <a href='https://dev.twitter.com/discussions/276'>3200 tweet limit</a> doesn't stop you from accessing your past tweets."
 
-    .span4
+    .span3
       %h3
         %i.icon-download-alt.icon-large
         Download
       %p You can download your own tweets in a variety of plain text formats, and manipulate them or use them freely.
 
-    .span4
+    .span3
       %h3
         %i.icon-search.icon-large
         Search
       %p Easily find that elusive tweet you posted months ago, using our advanced search features.
+
+    .span3
+      %h3
+        %i.icon-bar-chart.icon-large
+        Stats
+      %p View your top hashtags, users you've interacted with most, and other stats based on your tweets.
