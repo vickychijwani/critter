@@ -1,8 +1,8 @@
 class Critter < Sinatra::Application
   get '/download' do
     @all = false
-    if params and params[:query]
-      redirect route if params[:query] == ""
+    @tweets = []
+    if params and params[:query] != "" and params[:type]
       @query = params[:query]
       @type = params[:type].to_sym
       @tweets = search_tweets(user.tweets, @query, @type)

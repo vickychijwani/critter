@@ -52,9 +52,15 @@ module Helpers
   def search_tweets(tweets, query, type)
     case type
     when :substring
-      tweets.all(:order => [:created_at.desc]).find_all do |t|
-        t.text.downcase =~ /#{query.downcase}/
-      end
+      # use the following with caution! It returns an array, not a
+      # DataMapper::Collection instance (which is needed for methods like
+      # to_csv, to_json, etc to work properly)
+      # tweets.all(:order => [:created_at.desc]).find_all do |t|
+      #   t.text.downcase =~ /#{query.downcase}/
+      # end
+
+      # returns a DataMapper::Collection, but the 'like' operator does not allow case-insensitive searching
+      tweets.all(:order => [:created_at.desc], :text.like => "%#{query}%")
     when :date
       date_start, date_end = query.split(" to ").map { |s| s = s+"T00:00:00+00:00" }
       date_start, date_end = DateTime.parse(date_start), DateTime.parse(date_end)
@@ -62,8 +68,6 @@ module Helpers
         tweets.all(:created_at.lt => date_end, :order => [ :created_at.desc ])
     when :retweet
       tweets.all(:retweets.gt => query.to_i, :order => [ :created_at.desc ])
-    # when :reply
-    #   tweets.all(:in_reply_to_screen_name => query, :order => [ :created_at.desc ])
     end
   end
 
@@ -71,8 +75,10 @@ module Helpers
     valid_formats = valid_formats_sym
     method = "to_#{format}"
     if valid_formats_sym.include? format and tweets.respond_to?(method)
+      dir = "downloads"
       name = "tweets_#{user.screen_name}.#{format}"
-      path = "downloads/#{name}"
+      path = "#{dir}/#{name}"
+      Dir.mkdir(dir) unless File.exists?(dir) and File.directory?(dir)
       f = open(path, 'w')
       f.write(tweets.send(method))
       f.close
