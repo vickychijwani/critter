@@ -1,0 +1,22 @@
+have_library: checking for main() in -lreadline... -------------------- yes
+
+"colorgcc -o conftest -I/opt/local/include -I. -I/home/vicky/.rvm/rubies/ree-1.8.7-2012.02/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -g -O2    conftest.c  -L. -L/home/vicky/.rvm/rubies/ree-1.8.7-2012.02/lib -Wl,-R/home/vicky/.rvm/rubies/ree-1.8.7-2012.02/lib -L.  -rdynamic -Wl,-export-dynamic     -lruby-static -lreadline  -L/opt/local/lib -lrt -ldl -lcrypt -lm   -lc"
+checked program was:
+/* begin */
+1: /*top*/
+2: int main() { return 0; }
+3: int t() { void ((*volatile p)()); p = (void ((*)()))main; return 0; }
+/* end */
+
+--------------------
+
+have_header: checking for readline/readline.h... -------------------- yes
+
+"colorgcc -E -I/opt/local/include -I. -I/home/vicky/.rvm/rubies/ree-1.8.7-2012.02/lib/ruby/1.8/i686-linux -I.  -D_FILE_OFFSET_BITS=64  -g -O2     conftest.c -o conftest.i"
+checked program was:
+/* begin */
+1: #include <readline/readline.h>
+/* end */
+
+--------------------
+

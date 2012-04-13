@@ -1,0 +1,50 @@
+- @page = "download"
+- tweets = @tweets
+- sample_tweets = tweets.length > 20 ? tweets[0...20] : tweets
+- formats = valid_formats_str
+- values = [ :substring, :date, :retweet ]
+- options = [ "By keywords", "Between 2 dates", "Retweets greater than" ]
+
+.row
+  = partial :sidebar
+
+  .span8
+    .download.rounded-6.color-light
+      .form
+        %h3 Download
+        %form.form-horizontal{ :action => "/download", :method => "get" }
+          .control-group
+            %label.control-label Filter query:
+            .controls
+              %input{ :type => "text", :name => "query", :value => @query || "" }
+          .control-group
+            %label.control-label Filter criterion:
+            .controls
+              %select{ :name => "type" }
+                - options.length.times do |i|
+                  - value = values[i]
+                  - option = options[i]
+                  - if value == @type
+                    %option{ :value => value, :selected => true }= option
+                  - else
+                    %option{ :value => value }= option
+          .control-group
+            %label.control-label Limit:
+            .controls
+              %input{ :type => "text", :value => tweets.length, :name => "limit" }
+          .control-group
+            %label.control-label Format:
+            .controls
+              %select{ :name => "format" }
+                - formats.each do |f|
+                  %option{ :value => f.downcase.to_sym }= f
+          .form-actions
+            %button.btn.btn-primary{ :type => "submit" } Download
+            %button.btn.view-sample{ :type => "button" } View sample ...
+
+    .tweets.rounded-6.color-light
+      %h3 Sample Tweets
+      - sample_tweets.each do |tweet|
+        = partial :tweet, { :tweet => tweet }
+
+%script{ :type => "text/javascript", :src => "/js/download.js" }

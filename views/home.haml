@@ -1,0 +1,14 @@
+- @page = "home"
+- tweets = user.tweets(:order => [:created_at.desc])
+
+.row
+  = partial :sidebar
+
+  .tweets.span8.rounded-6.color-light
+    %h3 Tweets
+    - tweets.each do |tweet|
+      = partial :tweet, { :tweet => tweet }
+
+  %input.indexing_status{ :type => "hidden", :value => session[:indexing] }
+
+%script{ :type => "text/javascript", :src => "/js/home.js" }

@@ -1,0 +1,39 @@
+- @page = "sign-in"
+
+.hero-unit
+  #screenshots.carousel
+    .carousel-inner
+      .item.active
+        %img.rounded-6{ :src => "/images/screenshot-search.png", :width => "520", :height => "320" }
+      .item
+        %img.rounded-6{ :src => "/images/screenshot-download.png", :width => "520", :height => "320" }
+      .item
+        %img.rounded-6{ :src => "/images/screenshot-stats.png", :width => "520", :height => "320" }
+    %a.carousel-control.left{ :href => "#screenshots", :data => { :slide => "prev" } } &lsaquo;
+    %a.carousel-control.right{ :href => "#screenshots", :data => { :slide => "next" } } &rsaquo;
+  %h1 Critter
+  .row
+    %p.span3 We crawl your tweets and store them in our database, giving you complete control over them.
+  %a.btn.btn-primary.btn-large{ :href => "./oauth" }
+    %i.icon-twitter-sign.icon-large
+    Sign-in with Twitter
+
+%section#why.rounded-6
+  .row
+    .span4
+      %h3
+        %i.icon-folder-open.icon-large
+        Archive
+      %p= "So you can be assured that Twitter's <a href='https://dev.twitter.com/discussions/276'>3200 tweet limit</a> doesn't stop you from accessing your past tweets."
+
+    .span4
+      %h3
+        %i.icon-download-alt.icon-large
+        Download
+      %p You can download your own tweets in a variety of plain text formats, and manipulate them or use them freely.
+
+    .span4
+      %h3
+        %i.icon-search.icon-large
+        Search
+      %p Easily find that elusive tweet you posted months ago, using our advanced search features.

@@ -1,0 +1,62 @@
+!!! 5
+%html
+  %head
+    %title= "#{@page.capitalize} | Critter"
+    %link{ :rel => "shortcut icon", :href => "/images/favicon.ico", :type => "image/x-icon" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/site.css" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/bootstrap.min.css" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/font-awesome.css" }
+    %link{ :rel => "stylesheet", :type => "text/css", :href => "/css/notify-osd.css" }
+
+    %script{ :type => "text/javascript", :src => "/js/jquery-1.7.1.min.js" }
+    %script{ :type => "text/javascript", :src => "/js/bootstrap.min.js" }
+    %script{ :type => "text/javascript", :src => "/js/tagcloud.js" }
+    %script{ :type => "text/javascript", :src => "/js/notify-osd.js" }
+    %script{ :type => "text/javascript", :src => "/js/site.js" }
+
+  %body
+    #top-padding
+
+    .navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          %a.brand{ :href => "/" }
+            critter
+            %img{ :src => "images/critter2.png", :height => "18", :width => "18" }
+          .nav-collapse
+            - if logged_in?
+              %ul.nav
+                %li
+                  %a{ :href => "/home" } Home
+                %li
+                  %a{ :href => "/search" } Search
+                %li
+                  %a{ :href => "/download" } Download
+                %li
+                  %a{ :href => "/stats" } Stats
+
+              %form.navbar-search.pull-left{ :action => "/search", :method => "get" }
+                %input.search-query{ :type => "text", :placeholder => "Search", :name => "query" }
+                %input{ :type => "hidden", :name => "type", :value => "substring" }
+
+              %ul.nav.pull-right
+                %li.dropdown#user
+                  %a.dropdown-toggle{ :href => "#user", :data => { :toggle => "dropdown" } }
+                    %i.icon-user.icon-large
+                    = user.screen_name
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      %a{ :href => "http://twitter.com/#{user.screen_name}" } View Profile
+                    %li.divider
+                    %li
+                      %a{ :href => "/logout" } Logout
+
+    .container.wrapper
+      = partial :flash_messages
+      = yield
+
+      -# %hr
+
+      -# %p#credits
+      -#   = "A project by <a href='http://twitter.com/vickychijwani'>@vickychijwani</a>"

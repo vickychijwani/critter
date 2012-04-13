@@ -1,0 +1,23 @@
+- tweet = locals[:tweet]
+
+.tweet
+  %a.link{ :href => "http://twitter.com/#{tweet.user.screen_name}/status/#{tweet.id}" }
+    %span
+  .profile-pic
+    %img.rounded-4{ :src => tweet.user.profile_image_url }
+  %span.name
+    = tweet.user.name
+  %span.screen-name
+    = "@" + tweet.user.screen_name
+  %span.float
+    - if tweet.retweets > 0
+      %span.retweets
+        %img{ :src => "/images/retweet.png", :width => "16", :height => "10" }
+        = tweet.retweets
+      %span.separator= "|"
+    %span.date
+      = tweet.created_at.strftime("%H:%M:%S, %a %d %B, 20%y")
+  %br
+  .text
+    = tweet.auto_link
+  .clear-fix

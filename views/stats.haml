@@ -1,0 +1,21 @@
+- @page = "stats"
+
+.row
+  = partial :sidebar
+
+  .span8
+    .tag-cloud.rounded-6.color-light
+      %h3 Top hashtags
+      #hashtag-cloud-inner
+      .clear-fix
+
+    .tag-cloud.rounded-6.color-light
+      %h3 Top interactions
+      #mention-cloud-inner
+      .clear-fix
+
+    .graph.rounded-6.color-light
+      %h3 Tweets by hour of day
+      %img{ :src => gchart_tweets_by_hour }
+
+%script{ :type => "text/javascript", :src => "/js/stats.js" }

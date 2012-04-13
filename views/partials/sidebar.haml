@@ -1,0 +1,24 @@
+- tweets = user.tweets(:order => [:created_at.desc])
+- retweets_by_others = tweets.reduce(0) { |sum, t| sum + (t.retweets > 0 ? 1 : 0) }
+
+.sidebar.span4.rounded-6.color-light
+  .padding
+    %img.profile-pic.rounded-4{ :src => user.profile_image_url }
+    %h3= user.name
+    %h4= "@#{user.screen_name}"
+    %br
+    %p= user.description
+    %hr
+    %p.stats= "<strong>#{tweets.length}</strong> tweets indexed"
+    %p.stats= "<strong>#{retweets_by_others}</strong> retweeted by others"
+    %p.stats= "<strong>#{sprintf '%0.2f', user.tweets_per_day}</strong> tweets per day"
+    %hr
+    %p.header= "Popular tweets"
+    - user.popular_tweets(10).each do |t|
+      .sidebar-tweet
+        %a.link{ :href => "http://twitter.com/#{t.user.screen_name}/status/#{t.id}" }
+          %span
+        %span.date= t.created_at.strftime("%H:%M:%S, %a %d %B, 20%y")
+        %img{ :src => "/images/retweet.png", :width => "16", :height => "10" }
+        %span.retweets= t.retweets
+        %p= t.auto_link

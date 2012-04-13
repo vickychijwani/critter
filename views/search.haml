@@ -1,0 +1,37 @@
+- @page = "search"
+- tweets = @tweets
+- values = [ :substring, :date, :retweet ]
+- options = [ "By keywords", "Between 2 dates", "Retweets greater than" ]
+
+.row
+  = partial :sidebar
+
+  .span8
+    .search.rounded-6.color-light
+      .form
+        %h3 Search
+        %form.form-horizontal{ :action => "/search", :method => "get" }
+          .control-group
+            %label.control-label Query:
+            .controls
+              %input{ :type => "text", :name => "query", :value => @query || "" }
+          .control-group
+            %label.control-label Criterion:
+            .controls
+              %select{ :name => "type" }
+                - options.length.times do |i|
+                  - value = values[i]
+                  - option = options[i]
+                  - if value == @type
+                    %option{ :value => value, :selected => true }= option
+                  - else
+                    %option{ :value => value }= option
+          .form-actions
+            %button.btn.btn-primary{ :type => "submit" } Search
+            - if @query and @type
+              %a.btn{ :href => "/download?query=#{@query}&type=#{@type}" } Download results as ...
+
+    .tweets.rounded-6.color-light
+      %h3= @heading + ((@heading == "Search Results") ? " (total #{tweets.length} results)" : "")
+      - tweets.each do |tweet|
+        = partial :tweet, { :tweet => tweet }

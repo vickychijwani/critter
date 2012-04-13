@@ -1,0 +1,11 @@
+.row
+  - if flash[:error]
+    .span12
+      .alert.alert-error
+        %a.close{ :data => { :dismiss => "alert" } } &times;
+        = flash[:error]
+  - if flash[:success]
+    .span12
+      .alert.alert-success
+        %a.close{ :data => { :dismiss => "alert" } } &times;
+        = flash[:success]
