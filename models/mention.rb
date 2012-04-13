@@ -14,7 +14,6 @@ class Mention
 
   def self.add(tweet)
     mentions = Twitter::Extractor.extract_mentioned_screen_names(tweet.text)
-    puts mentions
     mentions.each do |m|
       mention = Mention.first_or_create(:text => m, :user => tweet.user)
       mention.update(:count => mention.count + 1)
